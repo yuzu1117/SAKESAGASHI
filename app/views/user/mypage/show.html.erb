@@ -1,0 +1,9 @@
+<h1>マイページ</h1>
+
+<li><%= @user.name %></li>
+<li><%= @user.nickname %></li>
+<li><%= @user.email %></li>
+
+<%= link_to '編集する', edit_user_mypage_path %>
+<%= link_to '退会する', user_unsubscribe_path %>
+

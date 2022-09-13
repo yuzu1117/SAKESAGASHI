@@ -1,0 +1,23 @@
+<header>
+    <li class="nav-item">
+      <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+        <p><i class="fas fa-sign-out-alt"></i> ログアウト</p>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to root_path, class: 'nav-link text-light' do %>
+        <p><i class="fas fa-link"></i> アバウト</p>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+        <p><i class="fas fa-user-plus"></i> 新規登録</p>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+        <p><i class="fas fa-sign-in-alt"></i> ログイン</p>
+      <% end %>
+    </li>
+</header>
