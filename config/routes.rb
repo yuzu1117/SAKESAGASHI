@@ -12,14 +12,20 @@ Rails.application.routes.draw do
   root to: 'user/homes#top'
 
   namespace :admin do
-    root to: "homes#top"
+    resources :items
+    resources :genres, except: [:new,:show]
+    resources :users, only: [:index, :show]
   end
 
   namespace :user do
     resources :mypage, only: [:show, :edit, :update]
+    get 'items/search' => 'items#search'
+    resources :items, only: [:show] do
+      resources :reviews, only: [:new, :create, :index]
+    end
     # 退会確認画面
     get '/mypage/:id/unsubscribe' => 'mypage#unsubscribe', as: 'unsubscribe'
-    # 論理削除用のルーティング
+    # 退会用
     patch '/mypage/:id/withdrawal' => 'mypage#withdrawal', as: 'withdrawal'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

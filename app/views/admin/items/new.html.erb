@@ -1,0 +1,35 @@
+<h1>商品新規登録</h1>
+<div>
+  <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+  <table class = 'table'>
+    <tbody>
+      <tr>
+        <th>商品画像</th>
+        <td><%= f.file_field :image, accept: "image/*" %></td>
+      </tr>
+      <tr>
+        <th>商品名</th>
+        <td><%= f.text_area :name %></td>
+      </tr>
+      <tr>
+        <th>メーカー</th>
+        <td><%= f.text_field :maker %></td>
+      </tr>
+      <tr>
+        <th>ジャンル</th>
+        <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), inclide_blank: '選択してください' %></td>
+      </tr>
+      <tr>
+        <th>発売日</th>
+        <td><%= f.text_field :release_date %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class = "row g-3">
+    <div class ="col-md-9 offset-md-5">
+    <%= f.submit '登録する', class: 'btn btn-success' %>
+    </div>
+  </div>
+  <% end %>
+</div>

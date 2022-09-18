@@ -2,16 +2,20 @@
 <html>
   <head>
     <title>SAKESAGASHI</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
-  <body>
+  <body  style= "padding-bottom:4.5rem;">
     <%= render 'layouts/header'%>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

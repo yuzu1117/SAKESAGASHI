@@ -1,0 +1,10 @@
+<div class="item-list">
+  <% @items.each do |item| %>
+    <%= link_to user_item_path(item.id) do %>
+      <%= item.name %>
+    <% end %>
+    <%= item.genre.name %>
+    <%= item.maker %>
+  <% end %>
+</div>
+

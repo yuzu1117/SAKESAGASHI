@@ -1,0 +1,30 @@
+ <!--レビュー-->
+    <div class = "form_group" >
+      <%= form_with model: @review, url: user_item_reviews_path, local: false, method: :post do |f| %>
+        <%= f.label :content, '感想' %>
+        <%= f.text_area :content %>
+    </div>
+
+        <!-- 評価 -->
+    <div class="form-group row" id="star">
+      <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+      <%= f.hidden_field :star, id: :star %>
+    </div>
+
+    <%= f.submit "投稿" %>
+
+    <!-- 評価javascript -->
+      <script>
+      $('#star').raty({
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'item[star]',
+        half: true,
+      });
+      </script>
+
+
+
+    <% end %>

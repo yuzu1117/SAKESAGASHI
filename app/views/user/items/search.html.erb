@@ -1,0 +1,18 @@
+
+<div class="search-form">
+  <%= form_with url: user_items_search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword, placeholder: "投稿を検索する" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+<div>
+ <div class="item-list">
+  <% @items.each do |item| %>
+    <%= image_tag item.image, size:'100x100' %>
+    <%= item.name %>
+    <%= item.genre.name %>
+    <%= item.maker %>
+  <% end %>
+  </div>
+</div>
