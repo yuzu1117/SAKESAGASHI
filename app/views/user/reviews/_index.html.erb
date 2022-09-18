@@ -1,0 +1,25 @@
+   <h1>口コミ一覧</h1>
+   <% @reviews.each do |review| %>
+
+    <div class=card>
+      <p>キレ：<%= review.sharpness %></p>
+      <p>コク：<%= review.rich %></p>
+      <p>酸味：<%= review.sourness %></p>
+      <p>甘味：<%= review.sweetness %></p>
+      <p>苦味：<%= review.bitterness %></p>
+      <p>評価 :<%= review.star %>点</p>
+      <div id="star-rate<%= review.id %>"></div>
+      <script>
+        $('#star-rate<%= review.id%>').raty({
+          size      : 20,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half      : true,
+          readOnly: true,
+          score: <%= review.star %>,
+        });
+      </script>
+      <%= link_to '詳細を見る', user_item_review_path(review.id) %>
+    </div>
+    <% end %>

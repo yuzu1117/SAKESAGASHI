@@ -1,30 +1,47 @@
- <!--レビュー-->
-    <div class = "form_group" >
-      <%= form_with model: @review, url: user_item_reviews_path, local: false, method: :post do |f| %>
-        <%= f.label :content, '感想' %>
-        <%= f.text_area :content %>
-    </div>
 
-        <!-- 評価 -->
+ <%= form_with model: @review, url: user_item_reviews_path, method: :post do |f| %>
+   <%= f.hidden_field :item_id %>
+   <%= f.hidden_field :user_id %>
+
+    <!-- 星評価 -->
     <div class="form-group row" id="star">
       <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
       <%= f.hidden_field :star, id: :star %>
-    </div>
-
-    <%= f.submit "投稿" %>
-
-    <!-- 評価javascript -->
-      <script>
+    <script>
       $('#star').raty({
-        size     : 36,
+        size     : 25,
         starOff:  '<%= asset_path('star-off.png') %>',
         starOn : '<%= asset_path('star-on.png') %>',
         starHalf: '<%= asset_path('star-half.png') %>',
-        scoreName: 'item[star]',
+        scoreName: 'review[star]',
         half: true,
       });
       </script>
+      </div>
+
+      <%= f.label :sharpness, 'キレ' %>
+      <%= f.number_field :sharpness, min:0,max:5 %>
+      <%= f.label :rich, 'コク' %>
+      <%= f.number_field :rich, min:0,max:5 %>
+      <%= f.label :sourness, '酸味' %>
+      <%= f.number_field :sourness, min:0,max:5 %>
+      <%= f.label :sweetness, '甘味' %>
+      <%= f.number_field :sweetness, min:0,max:5 %>
+      <%= f.label :bitterness, '苦味' %>
+      <%= f.number_field :bitterness, min:0,max:5 %>
+
+    <div class = "form_group" >
+        <%= f.label :content, '感想' %>
+          <%= f.text_area :content %>
+    </div>
+
+    <div>
+      <%= f.submit "投稿" %>
+    </div>
+
+    <!-- 評価javascript -->
 
 
 
-    <% end %>
+
+  <% end %>

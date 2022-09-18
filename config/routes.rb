@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :mypage, only: [:show, :edit, :update]
     get 'items/search' => 'items#search'
     resources :items, only: [:show] do
-      resources :reviews, only: [:new, :create, :index]
+      resources :reviews, only: [:new, :create, :index, :show]
     end
     # 退会確認画面
     get '/mypage/:id/unsubscribe' => 'mypage#unsubscribe', as: 'unsubscribe'
