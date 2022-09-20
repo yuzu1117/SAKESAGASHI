@@ -4,21 +4,21 @@
    <%= f.hidden_field :user_id %>
 
     <!-- 星評価 -->
-    <div class="form-group row" id="star">
-      <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+    <div id="star-rate">
+      <%= f.label :star,'評価 '%>
       <%= f.hidden_field :star, id: :star %>
-    <script>
-      $('#star').raty({
-        size     : 25,
-        starOff:  '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        scoreName: 'review[star]',
-        half: true,
-      });
+      <script>
+        $('#star-rate').raty({
+          size     : 50,
+          starOff  : '<%= asset_path('star-off.png') %>',
+          starOn   : '<%= asset_path('star-on.png') %>',
+          starHalf : '<%= asset_path('star-half.png') %>',
+          scoreName: 'review[star]',
+          half: true,
+        });
       </script>
-      </div>
-
+    </div>
+    <div>
       <%= f.label :sharpness, 'キレ' %>
       <%= f.number_field :sharpness, min:0,max:5 %>
       <%= f.label :rich, 'コク' %>
@@ -29,10 +29,19 @@
       <%= f.number_field :sweetness, min:0,max:5 %>
       <%= f.label :bitterness, '苦味' %>
       <%= f.number_field :bitterness, min:0,max:5 %>
+    </div>
 
     <div class = "form_group" >
         <%= f.label :content, '感想' %>
-          <%= f.text_area :content %>
+        <%= f.text_area :content %>
+    </div>
+     <div class = "form_group" >
+        <%= f.label :food, 'おすすめおつまみ' %>
+        <%= f.text_area :food %>
+    </div>
+     <div class = "form_group" >
+        <%= f.label :situation, 'こんな時におすすめ！' %>
+        <%= f.text_area :situation %>
     </div>
 
     <div>

@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   namespace :user do
     resources :mypage, only: [:show, :edit, :update]
     get 'items/search' => 'items#search'
-    resources :items, only: [:show] do
+    resources :items, only: [:show, :index] do
       resources :reviews, only: [:new, :create, :index, :show]
     end
+    get 'ranks/rank' => 'ranks#rank'
     # 退会確認画面
     get '/mypage/:id/unsubscribe' => 'mypage#unsubscribe', as: 'unsubscribe'
     # 退会用

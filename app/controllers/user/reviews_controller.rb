@@ -26,10 +26,13 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
+
   private
 
   def review_params
-    params.require(:review).permit(:item_id, :user_id, :content, :star, :sharpness,:rich, :sourness, :sweetness, :bitterness, :created_at)
+    params.require(:review).permit(:item_id, :user_id, :content, :star,
+    :sharpness,:rich, :sourness, :sweetness, :bitterness, :food, :situation,
+    :created_at)
   end
 
 

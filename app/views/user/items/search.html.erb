@@ -1,18 +1,35 @@
 
 <div class="search-form">
-  <%= form_with url: user_items_search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword, placeholder: "投稿を検索する" %>
-    <%= f.submit "検索" %>
+  <h3>商品名から探す</h3>
+  <%= form_with url: user_items_path, method: :get do |f| %>
+    <div>
+      <%= f.label :keyword, '商品名' %>
+      <%= f.text_field :keyword, value: @keyword, placeholder: "投稿を検索する" %>
+    </div>
+    <div>
+      <%= f.submit "検索" %>
+    </div>
   <% end %>
+
 </div>
 
 <div>
- <div class="item-list">
-  <% @items.each do |item| %>
-    <%= image_tag item.image, size:'100x100' %>
-    <%= item.name %>
-    <%= item.genre.name %>
-    <%= item.maker %>
+  <h3>ジャンルから探す</h3>
+  <%= form_with url: user_items_path, method: :get do |f| %>
+    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+    <%= f.submit '検索' %>
   <% end %>
-  </div>
+</div>
+
+
+<div>
+  <h3>ランキングから探す</h3>
+  <% @ranks.each.with_index(1) do |item, i|%>
+  <h5>第<%= i %>位</h5>
+      <ul>
+        <li　class="list-unstyled">商品名：<%= item.name %></li>
+        <li　class="list-unstyled">メーカー：<%= item.maker %></li>
+        <li　class="list-unstyled">発売日：<%= item.release_date.to_date %></li>
+      </ul>
+<% end %>
 </div>

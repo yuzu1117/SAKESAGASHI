@@ -1,13 +1,13 @@
 class Item < ApplicationRecord
-  
+
   has_many :reviews
   belongs_to :genre
   has_one_attached :image
 
-  def self.search(search)
-    if search != ''
-      Item.where("name LIKE(?)", "%#{search}%")
+  def self.search(keyword)
+    if keyword != ''
+      Item.where("name LIKE(?)", "%#{keyword}%")
     end
   end
-  
+
 end

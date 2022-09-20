@@ -1,10 +1,18 @@
-<div class="item-list">
+
+<div>
+<% if @items == [] %>
+<h2 class = "seach-result">検索結果はありません</h2>
+<% else %>
   <% @items.each do |item| %>
+    <%= image_tag item.image, size: "200x200" %>
     <%= link_to user_item_path(item.id) do %>
       <%= item.name %>
     <% end %>
     <%= item.genre.name %>
     <%= item.maker %>
   <% end %>
+
+<% end %>
+
 </div>
 

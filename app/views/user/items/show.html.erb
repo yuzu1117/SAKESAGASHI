@@ -1,5 +1,4 @@
 <div class="col-md-9">
-  <div class="row pr-5">
     <div class="col-md-4">
       <% if @item.image.attached? %>
        <%= image_tag @item.image, size: "100x100" %>
@@ -10,17 +9,23 @@
 
     <div class="col-md-7 ml-4 pr-3 d-flex flex-wrap">
       <ul>
-        <li　class="list-unstyled"><h1><%= @item.name %></h1></li>
-        <li　class="list-unstyled"><h2><%= @item.maker %></h2></li>
-        <li　class="list-unstyled"><h2><%= @item.release_date %></h2></li>
+        <li　class="list-unstyled"><%= @item.name %></li>
+        <li　class="list-unstyled"><%= @item.maker %></li>
+        <li　class="list-unstyled"><%= @item.release_date.to_date %></li>
       </ul>
     </div>
 
+  <div>
+    <%= render 'user/reviews/average' %>
+  </div>
+
+  <div>
     <%= render 'user/reviews/index' %>
+  </div>
 
 
    <div>
      <%= link_to 'レビューをする', new_user_item_review_path(@item.id) %>
    </div>
 
-  </div>
+</div>

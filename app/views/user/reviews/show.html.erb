@@ -1,13 +1,39 @@
 <h1>口コミ詳細</h1>
 
+<h3>ユーザー：<%= @review.user.nickname %></h3>
+<h3>投稿日時：<%= @review.created_at.strftime("%Y-%m-%d %H:%M")%></h3>
+
   <div class="col-md-7 ml-4 pr-3 d-flex flex-wrap">
     <ul>
-      <li　class="list-unstyled"><h1>評価：<%= @review.star %></h1></li>
-      <li　class="list-unstyled"><h2>キレ：<%= @review.sharpness %></h2></li>
-      <li　class="list-unstyled"><h2>コク：<%= @review.rich %></h2></li>
-      <li　class="list-unstyled"><h2>酸味：<%= @review.sourness %></h2></li>
-      <li　class="list-unstyled"><h2>甘味：<%= @review.sweetness %></h2></li>
-      <li　class="list-unstyled"><h2>苦味：<%= @review.bitterness %></h2></li>
+      <li　class="list-unstyled"><h2>評価：<%= @review.star %></h2>
+      <div id="star-rate<%= @review.id %>"></div>
+        <script>
+          $('#star-rate<%= @review.id %>').raty({
+            size      : 20,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            starHalf  : '<%= asset_path('star-half.png') %>',
+            half      : true,
+            readOnly  : true,
+            score     : <%= @review.star %>,
+          });
+        </script>
+      </li>
+      <li　class="list-unstyled"><h3>キレ：<%= @review.sharpness %></h3></li>
+      <li　class="list-unstyled"><h3>コク：<%= @review.rich %></h3></li>
+      <li　class="list-unstyled"><h3>酸味：<%= @review.sourness %></h3></li>
+      <li　class="list-unstyled"><h3>甘味：<%= @review.sweetness %></h3></li>
+      <li　class="list-unstyled"><h3>苦味：<%= @review.bitterness %></h3></li>
       <li　class="list-unstyled"><h4>感想：<%= @review.content %></h4></li>
+      <li　class="list-unstyled"><h4>おすすめおつまみ：
+        <% if @review.food.present? %>
+          <%= @review.food %>
+        <% end %>
+      </h4></li>
+      <li　class="list-unstyled"><h4>こんな時におすすめ！：
+        <% if @review.situation.present? %>
+          <%= @review.situation %>
+        <% end %>
+      </h4></li>
     </ul>
   </div>

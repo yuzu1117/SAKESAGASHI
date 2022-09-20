@@ -1,6 +1,10 @@
-<header class="shadow-sm">
+<header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
+      <div class = "navbar-brand" href= "/">
+        <%= link_to root_path do %>
+          <%= image_tag ('logo.jpeg') %>
+        <% end %></div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,7 +20,7 @@
               <%= link_to'お酒を探す', user_items_search_path,  class: 'nav-link'%>
             </li>
             <li class="nav-item">
-              'ランキングを見る'
+              <%= link_to 'ランキング', user_ranks_rank_path, class: 'nav_link' %>
             </li>
             <li class="nav-item">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
@@ -35,25 +39,19 @@
 
           <% else %>
             <li class="nav-item">
-              <%= link_to new_user_registration_path, class: 'nav-link' do %>
-                <p><i class="fas fa-user-plus"></i> 新規登録</p>
-              <% end %>
+              <%= link_to '新規登録', new_user_registration_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
-              <%= link_to new_user_session_path, class: 'nav-link' do %>
-                <p><i class="fas fa-sign-in-alt"></i> ログイン</p>
-              <% end %>
+              <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
-              'ランキングを見る'
+              <%= link_to 'ランキング', user_ranks_rank_path, class: 'nav_link' %>
             </li>
             <li class="nav-item">
               'お問合せ'
             </li>
             <li class="nav-item">
-              <%= link_to new_admin_session_path, class: 'nav-link' do %>
-                <p><i class="fas fa-sign-in-alt"></i> 管理者ログイン</p>
-              <% end %>
+              <%= link_to '管理者ログイン', new_admin_session_path, class: 'nav-link' %>
             </li>
           <% end %>
           </ul>
