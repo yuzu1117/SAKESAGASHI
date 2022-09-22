@@ -29,7 +29,7 @@
           });
         </script>
       </td>
-      <td><%= link_to "詳しく見る", user_item_review_path(review.id) %></td>
+      <td><%= link_to "詳しく見る", user_item_review_path(review.item.id, review.id) %></td>
     </tr>
   <% end %>
 </div>

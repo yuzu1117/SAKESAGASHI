@@ -1,0 +1,31 @@
+<h1>レビュー一覧</h1>
+
+<div>
+  <% @reviews.each do |review| %>
+  <table>
+    <thead>
+      <tr>
+        <th>ユーザー</th>
+        <th>投稿日時</th>
+        <th>商品</th>
+        <th>評価</th>
+        <th>内容</th>
+        <th>おつまみ</th>
+        <th>シチュエーション</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= review.user.name %></th>
+        <th><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></th>
+        <th><%= review.item.name %></th>
+        <th><%= review.star %>点</th>
+        <th><%= review.content %></th>
+        <th><%= review.food %></th>
+        <th><%= review.situation %></th>
+        <th><%= link_to '削除', admin_review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' } %></th>
+      </tr>
+    </tbody>
+  </table>
+  <% end %>
+</div>

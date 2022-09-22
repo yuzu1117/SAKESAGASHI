@@ -30,8 +30,8 @@
             <td><%= @item.genre.name %></td>
           </tr>
           <tr>
-            <th>レビュー</th>
-            <td></td>
+            <th>発売日</th>
+            <td><%= @item.release_date %></td>
           </tr>
         </tbody>
       </table>
@@ -41,6 +41,7 @@
   <div class="row g-3">
    <div class= "col md-9 offset-md-9">
     <%= link_to"編集する", edit_admin_item_path(@item.id), class: 'btn btn-success' %>
+    <%= link_to"削除する", admin_item_path(@item.id), method: :delete, data: { confirm: '本当に消しますか？' },  class: 'btn btn-success' %>
   </div>
 
 </div>

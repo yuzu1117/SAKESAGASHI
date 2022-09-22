@@ -16,6 +16,6 @@
         });
       </script>
       <p><%= review.content %></p>
-      <%= link_to '詳細を見る', user_item_review_path(review.id) %>
+      <%= link_to '詳細を見る', user_item_review_path(review.item.id, review.id) %>
     </div>
   <% end %>

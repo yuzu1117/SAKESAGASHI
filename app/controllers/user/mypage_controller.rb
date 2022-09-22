@@ -10,7 +10,13 @@ class User::MypageController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    user = User.find(params[:id])
+    if user.update(user_params)
+      flash[:notice] = "会員情報が変更されました。"
+      redirect_to user_mypage_path(user.id)
+    else
+      render :edit
+    end
   end
 
   def withdrawal
@@ -22,5 +28,10 @@ class User::MypageController < ApplicationController
     redirect_to root_path
   end
 
+  private
 
+  def user_params
+    params.require(:user).permit(:name, :nickname, :email,:is_deleted)
+  end
 end
+

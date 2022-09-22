@@ -1,5 +1,7 @@
 class User::ReviewsController < ApplicationController
 
+  before_action :authenticate_user!, except: [:index, :show]
+
   def new
     @review = Review.new
     @item = @review.item
@@ -11,6 +13,7 @@ class User::ReviewsController < ApplicationController
     review.user_id = current_user.id
     review.item_id = item.id
     if review.save
+      flash[:notice] = "レビューが投稿されました。"
       redirect_to user_item_path(item.id)
     else
       render :new
@@ -24,6 +27,7 @@ class User::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @review_comment = ReviewComment.new
   end
 
 

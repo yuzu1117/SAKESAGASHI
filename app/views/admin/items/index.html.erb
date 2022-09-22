@@ -4,13 +4,13 @@
   <div class='row g-3'>
     <div class='col'>
       <table class="table text-center">
-         <thead class="table-success">
+         <thead class="table-danger">
            <tr>
              <th scope="col">商品画像</th>
              <th scope="col">商品名</th>
              <th scope="col">メーカー</th>
              <th scope="col">ジャンル</th>
-             <th scope="col">評価</th>
+             <th scope="col"></th>
             </tr>
           </thead>
 
@@ -25,18 +25,13 @@
               <% end %>
              </td>
              <td>
-              <%= link_to admin_item_path(item.id) do %>
                <%= item.name %>
-              <% end %>
              </td>
              <td>
               <%= item.maker %>
              </td>
              <td>
               <%= item.genre.name %>
-             </td>
-             <td>
-               評価
              </td>
              <td>
                <%= link_to '編集する', edit_admin_item_path(item.id) %>

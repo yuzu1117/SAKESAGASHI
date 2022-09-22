@@ -13,15 +13,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :items
-    resources :genres, except: [:new,:show]
-    resources :users, only: [:index, :show]
+    resources :genres, except: [:new, :show]
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :reviews, only: [:index, :destroy]
   end
+
 
   namespace :user do
     resources :mypage, only: [:show, :edit, :update]
     get 'items/search' => 'items#search'
     resources :items, only: [:show, :index] do
-      resources :reviews, only: [:new, :create, :index, :show]
+      resources :reviews, only: [:new, :create, :index, :show] do
+        resources :review_comments, only: [:create]
+      end
     end
     get 'ranks/rank' => 'ranks#rank'
     # 退会確認画面

@@ -11,4 +11,5 @@ class User < ApplicationRecord
 
   has_one_attached :image
   has_many :reviews, dependent: :destroy
+  has_many :review_comment, dependent: :destroy
 end

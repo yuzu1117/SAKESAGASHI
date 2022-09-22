@@ -1,8 +1,12 @@
 class Item < ApplicationRecord
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   belongs_to :genre
   has_one_attached :image
+
+  validates :name, presence: true
+  validates :maker, presence: true
+
 
   def self.search(keyword)
     if keyword != ''
