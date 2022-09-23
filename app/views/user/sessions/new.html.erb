@@ -30,6 +30,8 @@
 
 
       <p>新規登録は<%= link_to 'こちらから', new_user_registration_path, class: "text-dark" %></p>
+
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
     </div>
   </div>
 </div>

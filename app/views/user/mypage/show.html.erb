@@ -1,15 +1,21 @@
 <h4>マイページ</h4>
 
-<li>名前：<%= @user.name %></li>
-<li>表示名：<%= @user.nickname %></li>
-<li>メールアドレス：<%= @user.email %></li>
+<% if @user.name != "guestuser" %>
+  <li>名前：<%= @user.name %></li>
+  <li>表示名：<%= @user.nickname %></li>
+  <li>メールアドレス：<%= @user.email %></li>
 
+  <%= link_to '編集する', edit_user_mypage_path, class:"btn btn-outline-warning" %>
+  <%= link_to '退会する', user_unsubscribe_path, class:"btn btn-outline-danger" %>
 
-<%= link_to '編集する', edit_user_mypage_path, class:"btn btn-outline-warning" %>
-<%= link_to '退会する', user_unsubscribe_path, class:"btn btn-outline-danger" %>
+<% else %>
+  <h3>ゲストユーザー</h3>
+
+<% end %>
 
 
 <div>
+  <h4>私のレビュー</h4>
   <tabel>
   <% @reviews.each do |review| %>
     <tr>
@@ -30,6 +36,16 @@
         </script>
       </td>
       <td><%= link_to "詳しく見る", user_item_review_path(review.item.id, review.id) %></td>
+    </tr>
+  <% end %>
+</div>
+
+<div>
+  <h4>私のコメント</h4>
+   <% @review_comments.each do |review_comment| %>
+    <tr>
+      <td><%= review_comment.review.user.nickname %></td>
+      <td><%= review_comment.comment %></td>
     </tr>
   <% end %>
 </div>

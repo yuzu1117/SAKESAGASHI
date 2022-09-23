@@ -5,6 +5,10 @@ Rails.application.routes.draw do
    sessions: 'user/sessions'
   }
 
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+  end
+
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
    sessions: "admin/sessions"
   }
@@ -16,6 +20,7 @@ Rails.application.routes.draw do
     resources :genres, except: [:new, :show]
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :destroy]
+    resources :review_comments, only: [:index, :destroy]
   end
 
 

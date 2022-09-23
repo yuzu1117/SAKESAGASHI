@@ -12,7 +12,7 @@
 
   </head>
 
-  <body  style= "padding-bottom:4.5rem;">
+  <body style= "padding-bottom:4.5rem;">
     <%= render 'layouts/header'%>
       <!--メッセージ＆アラート-->
     <% if flash[:notice ] %>
@@ -21,7 +21,7 @@
     <% if flash[:alert] %>
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
-    <main>
+    <main style= "background-coler:#ccff99;">
       <%= yield %>
     </main>
   </body>

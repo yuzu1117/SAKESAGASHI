@@ -1,0 +1,16 @@
+<h1>コメント一覧</h1>
+ <% @review_comments.each do |review_comment|%>
+ <table>
+   <tbody>
+     <tr>
+       <td>
+         <%= link_to admin_user_path(review_comment.user.id) do%>
+           <%= review_comment.user.name %>
+          <% end %>
+        </td>
+       <td><%= review_comment.comment %></td>
+       <td><%= link_to '削除', admin_review_comment_path(review_comment.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+     </tr>
+   </tbody>
+ </table>
+<% end %>

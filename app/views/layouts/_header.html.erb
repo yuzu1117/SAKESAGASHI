@@ -1,9 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class = "navbar-brand" href= "/">
+    <div class="container-fluid">
+      <a class = "navbar-brand" href= "/" >
         <%= link_to root_path do %>
-          <%= image_tag asset_path('SAKESAGASHI.png') %>
+          <%= image_tag asset_path('SAKESAGASHI.png')%>
         <% end %>
         </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -11,47 +11,50 @@
       <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-5">
 
           <% if user_signed_in? %>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'マイページ', user_mypage_path(current_user.id), class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to'お酒を探す', user_items_search_path,  class: 'nav-link'%>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ランキング', user_ranks_rank_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
             </li>
 
           <% elsif admin_signed_in? %>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'お酒一覧', admin_items_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'レビュー一覧', admin_reviews_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
+              <%= link_to 'コメント一覧', admin_review_comments_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete,class: 'nav-link' %>
             </li>
 
           <% else %>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to '新規登録', new_user_registration_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to 'ランキング', user_ranks_rank_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-5 h5">
               <%= link_to '管理者ログイン', new_admin_session_path, class: 'nav-link' %>
             </li>
           <% end %>

@@ -1,8 +1,11 @@
 class User::MypageController < ApplicationController
 
+  before_action :ensure_guest_user, only: [:edit]
+
   def show
     @user = User.find(params[:id])
     @reviews = @user.reviews.all
+    @review_comments =@user.review_comment.all
   end
 
   def edit
@@ -33,5 +36,14 @@ class User::MypageController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :nickname, :email,:is_deleted)
   end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "guestuser"
+      flash[:notice] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to root_path
+    end
+  end
+
 end
 

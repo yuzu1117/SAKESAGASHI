@@ -23,7 +23,7 @@
         <th><%= review.content %></th>
         <th><%= review.food %></th>
         <th><%= review.situation %></th>
-        <th><%= link_to '削除', admin_review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' } %></th>
+        <th><%= link_to '削除', admin_review_path(review.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
       </tr>
     </tbody>
   </table>

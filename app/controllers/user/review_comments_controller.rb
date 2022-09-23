@@ -1,5 +1,7 @@
 class User::ReviewCommentsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def create
     review = Review.find(params[:review_id])
     review_comment = current_user.review_comment.new(review_comment_params)
@@ -8,7 +10,7 @@ class User::ReviewCommentsController < ApplicationController
     redirect_to user_item_review_path(review.item.id,review.id)
   end
 
-  private
+  protected
 
   def review_comment_params
     params.require(:review_comment).permit(:comment)
