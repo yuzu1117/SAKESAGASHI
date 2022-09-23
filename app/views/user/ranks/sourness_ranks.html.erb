@@ -1,0 +1,14 @@
+<h3>酸味</h3>
+<% @sourness_ranks.each.with_index(1) do |item, i|%>
+  <h5>第<%= i %>位</h5>
+      <ul>
+        <li　class="list-unstyled">商品名：
+        <%= link_to user_item_path(item.id) do %>
+          <%= item.name %>
+        <% end %>
+        </li>
+        <li　class="list-unstyled">メーカー：<%= item.maker %></li>
+        <li　class="list-unstyled">発売日：<%= item.release_date %></li>
+        <li　class="list-unstyled">酸味:<%= item.reviews.average(:sourness)%></li>
+      </ul>
+<% end %>

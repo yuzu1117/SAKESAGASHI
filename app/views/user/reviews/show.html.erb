@@ -45,10 +45,15 @@
         <%= review_comment.comment %>
       <% end %>
     </div>
+    <!--ユーザーがサインインしてたらコメントできる-->
+    <% if user_signed_in? %>
     <div>
       <%= form_with model:[@review, @review_comment], url: user_item_review_review_comments_path(@review.item.id, @review.id, @review_comment.id), method: :post do |f| %>
         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
         <%= f.submit "送信する" %>
       <% end %>
+    <% else %>
+     <p>コメントをするには<%= link_to '新規登録', new_user_registration_path %>もしくは<%= link_to 'ログイン', new_user_session_path %>が必要です。</p>
+    <% end %>
     </div>
   </div>

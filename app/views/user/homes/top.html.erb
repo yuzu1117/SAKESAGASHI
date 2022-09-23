@@ -1,11 +1,27 @@
-<h2>SAKESAGASHIはお酒専門のレビューサイト。<br>
-好みのお酒を探すため、お酒の感想をシェアするため、<br>
-使ってみませんか？</h2>
-<h6>甘いお酒が好き！そんな時には甘さの数値を見て探したり。<br>
-このビールには何が合うの？そんな時にはレビューを見ておすすめおつまみを見つけたり。<br>
-そんなことができるサイトです。</h6>
+<div class = 'container'>
+  <div class = 'row offset-3'><%= image_tag asset_path('header.png'), size: "500x250" %></div>
+    <h2 class ='text-center'>SAKESAGASHIはお酒専門のレビューサイト。<br>
+        好みのお酒を探すため、お酒の感想をシェアするため、<br>
+        使ってみませんか？</h2>
+  </div>
 
-<h4>検索は<%= link_to 'こちら', user_items_search_path %>から</h4>
 
-<p>レビューの投稿には新規登録が必要です。</p>
+  <div class = 'row mt-3'>
+    <div class= 'col-2 offset-1'>
+      <h4>使い方</h4>
+    </div>
+    <div class = "col-4">
+      <a>レビューを書くとき</a>
+    </div>
+    <div class = "col-5">
+      <a>レビューを見るとき</a>
+    </div>
+  </div>
+
+  <div class = 'row offset-2 text-danger'>
+    ※レビュー・コメントの投稿には新規登録またはログイン(ゲストログイン可)が必要です。
+  </div>
+
+
+</div>
 

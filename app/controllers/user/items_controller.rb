@@ -5,7 +5,7 @@ class User::ItemsController < ApplicationController
     @keyword = params[:keyword]
     @genres = Genre.all
     #ランキングから探すメソッド
-    @ranks = Item.find(Review.group(:item_id).order('avg(star) desc').pluck(:item_id))
+    @ranks = Item.find(Review.group(:item_id).order('avg(star) desc').limit(3).pluck(:item_id))
   end
 
   def index

@@ -32,7 +32,11 @@ Rails.application.routes.draw do
         resources :review_comments, only: [:create]
       end
     end
+    #ランキング表示のルーティング
     get 'ranks/rank' => 'ranks#rank'
+    get 'ranks/sourness_ranks' => 'ranks#sourness_ranks'
+    get 'ranks/sweetness_ranks' => 'ranks#sweetness_ranks'
+    get 'ranks/bitterness_ranks' => 'ranks#bitterness_ranks'
     # 退会確認画面
     get '/mypage/:id/unsubscribe' => 'mypage#unsubscribe', as: 'unsubscribe'
     # 退会用
