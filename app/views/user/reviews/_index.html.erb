@@ -1,20 +1,22 @@
-   <h31>口コミ一覧</h3>
-   <% @reviews.each do |review| %>
 
-    <div>
-      <p>評価：<%= review.star %>点</p>
-      <div id="star-rate<%= review.id %>"></div>
-      <script>
-        $('#star-rate<%= review.id %>').raty({
-          size      : 20,
-          starOff   : '<%= asset_path('star-off.png') %>',
-          starOn    : '<%= asset_path('star-on.png') %>',
-          starHalf  : '<%= asset_path('star-half.png') %>',
-          half      : true,
-          readOnly  : true,
-          score     : <%= review.star %>,
-        });
-      </script>
+   <% @reviews.each do |review| %>
+    <div class = 'col-5 pt-3 mr-1 border-bottom border-secondary'>
+      投稿者：<%= review.user.nickname %><br>
+      投稿日時：<%= review.created_at %>
+      <div id="star-rate<%= review.id %>">
+        <script>
+          $('#star-rate<%= review.id %>').raty({
+            size      : 40,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            starHalf  : '<%= asset_path('star-half.png') %>',
+            half      : true,
+            readOnly  : true,
+            score     : <%= review.star %>,
+          });
+        </script>
+        <%= review.star %>
+      </div>
       <p><%= review.content %></p>
       <%= link_to '詳細を見る', user_item_review_path(review.item.id, review.id) %>
     </div>

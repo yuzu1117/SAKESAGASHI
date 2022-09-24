@@ -1,31 +1,26 @@
-<div class="col-md-9">
-    <div class="col-md-4">
+<div class = 'container'>
+  <div class = 'row'>
+    <div class="col-3">
       <% if @item.image.attached? %>
-       <%= image_tag @item.image, size: "100x100" %>
+       <%= image_tag @item.image, size: "350x350" %>
       <% else %>
-       <%= image_tag 'no_image', size: "100x100" %>
+       <%= image_tag 'no_image', size: "350x350" %>
       <% end %>
     </div>
 
-    <div class="col-md-7 ml-4 pr-3 d-flex flex-wrap">
+    <div class ='col-8 mt-5'>
       <ul>
-        <li　class="list-unstyled"><%= @item.name %></li>
-        <li　class="list-unstyled"><%= @item.maker %></li>
-        <li　class="list-unstyled"><%= @item.release_date %></li>
+        <li　class="list-unstyled"><h2><%= @item.name %></li>
+        <li　class="list-unstyled"><h4><%= @item.maker %></li>
+        <li　class="list-unstyled"><h4><%= @item.release_date %></li>
       </ul>
+      <%= render 'user/reviews/average' %>
+      <%= link_to 'レビューをする', new_user_item_review_path(@item.id), class: 'btn btn-secondary' %>
     </div>
-
-  <div>
-    <%= render 'user/reviews/average' %>
   </div>
 
-  <div>
+  <div class = 'row offset-1 mt-5'>
     <%= render 'user/reviews/index' %>
   </div>
-
-
-   <div>
-     <%= link_to 'レビューをする', new_user_item_review_path(@item.id) %>
-   </div>
 
 </div>

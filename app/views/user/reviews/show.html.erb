@@ -1,59 +1,90 @@
-<h1>口コミ詳細</h1>
-
-<h3>ユーザー：<%= @review.user.nickname %></h3>
-<h3>投稿日時：<%= @review.created_at.strftime("%Y-%m-%d %H:%M")%></h3>
-
-  <div class="col-md-7 ml-4 pr-3 d-flex flex-wrap">
-    <ul>
-      <li　class="list-unstyled"><h2>評価：<%= @review.star %></h2>
-      <div id="star-rate<%= @review.id %>"></div>
-        <script>
-          $('#star-rate<%= @review.id %>').raty({
-            size      : 20,
-            starOff   : '<%= asset_path('star-off.png') %>',
-            starOn    : '<%= asset_path('star-on.png') %>',
-            starHalf  : '<%= asset_path('star-half.png') %>',
-            half      : true,
-            readOnly  : true,
-            score     : <%= @review.star %>,
-          });
-        </script>
-      </li>
-      <li　class="list-unstyled"><h3>キレ：<%= @review.sharpness %></h3></li>
-      <li　class="list-unstyled"><h3>コク：<%= @review.rich %></h3></li>
-      <li　class="list-unstyled"><h3>酸味：<%= @review.sourness %></h3></li>
-      <li　class="list-unstyled"><h3>甘味：<%= @review.sweetness %></h3></li>
-      <li　class="list-unstyled"><h3>苦味：<%= @review.bitterness %></h3></li>
-      <li　class="list-unstyled"><h4>感想：<%= @review.content %></h4></li>
-      <li　class="list-unstyled"><h4>おすすめおつまみ：
-        <% if @review.food.present? %>
-          <%= @review.food %>
-        <% end %>
-      </h4></li>
-      <li　class="list-unstyled"><h4>こんな時におすすめ！：
-        <% if @review.situation.present? %>
-          <%= @review.situation %>
-        <% end %>
-      </h4></li>
-    </ul>
-
-    <div>
-      <p>コメント数：<%= @review.review_comments.count %>件</p>
-      <% @review.review_comments.each do |review_comment| %>
-        <%= review_comment.user.nickname %>
-        <%= review_comment.created_at.strftime('%Y/%m/%d') %>
-        <%= review_comment.comment %>
+<div class ='container'>
+  <div class = 'row'>
+    <div class="col-3">
+      <% if @review.item.image.attached? %>
+       <%= image_tag @review.item.image, size: "350x350" %>
+      <% else %>
+       <%= image_tag 'no_image', size: "350x350" %>
       <% end %>
     </div>
-    <!--ユーザーがサインインしてたらコメントできる-->
-    <% if user_signed_in? %>
-    <div>
-      <%= form_with model:[@review, @review_comment], url: user_item_review_review_comments_path(@review.item.id, @review.id, @review_comment.id), method: :post do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
-    <% else %>
-     <p>コメントをするには<%= link_to '新規登録', new_user_registration_path %>もしくは<%= link_to 'ログイン', new_user_session_path %>が必要です。</p>
-    <% end %>
+
+    <div class ='col-8 mt-5'>
+      <ul>
+        <li　class="list-unstyled"><h2>
+          <%= link_to user_item_path(@review.item.id), class: 'text-dark' do %>
+            <%= @review.item.name %>
+          <% end %>
+        </li>
+        <li　class="list-unstyled"><h4><%= @review.item.maker %></li>
+        <li　class="list-unstyled"><h4><%= @review.item.release_date %></li>
+      </ul>
+
+      <div>
+        <div id="star-rate<%= @review.id %>">
+          <script>
+            $('#star-rate<%= @review.id %>').raty({
+              size      : 40,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              starHalf  : '<%= asset_path('star-half.png') %>',
+              half      : true,
+              readOnly  : true,
+              score     : <%= @review.star %>,
+            });
+          </script>
+          <a><%= @review.star %></a>
+        </div>
+
+        <div>
+          <ul class = "list-group list-group-horizontal">
+            <li class ="list-group-item">キレ：<%= @review.sharpness %></li>
+            <li class ="list-group-item">コク：<%= @review.rich %></li>
+            <li class ="list-group-item">酸味：<%= @review.sourness %></li>
+            <li class ="list-group-item">甘味：<%= @review.sweetness %></li>
+            <li class ="list-group-item">苦味：<%= @review.bitterness %></li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   </div>
+
+  <div class = 'row'>
+    感想：<%= @review.content %>
+  </div>
+  <div class = 'row'>
+    おすすめおつまみ：
+      <% if @review.food.present? %>
+        <%= @review.food %>
+      <% end %>
+  </div>
+  <div>
+    こんな時におすすめ！：
+      <% if @review.situation.present? %>
+        <%= @review.situation %>
+      <% end %>
+  </div>
+
+
+  <div class = 'row'>
+    <div class = 'col'>
+        <p>コメント数：<%= @review.review_comments.count %>件</p>
+        <% @review.review_comments.each do |review_comment| %>
+          <%= review_comment.user.nickname %>
+          <%= review_comment.created_at.strftime('%Y/%m/%d') %>
+          <%= review_comment.comment %>
+        <% end %>
+      </div>
+      <!--ユーザーがサインインしてたらコメントできる-->
+      <% if user_signed_in? %>
+      <div>
+        <%= form_with model:[@review, @review_comment], url: user_item_review_review_comments_path(@review.item.id, @review.id, @review_comment.id), method: :post do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      <% else %>
+       <p>コメントをするには<%= link_to '新規登録', new_user_registration_path %>もしくは<%= link_to 'ログイン', new_user_session_path %>が必要です。</p>
+      <% end %>
+      </div>
+    </div>
+</div>

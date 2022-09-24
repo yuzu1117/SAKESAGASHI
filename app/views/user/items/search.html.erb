@@ -1,51 +1,72 @@
-
-<div class="search-form">
-  <h3>商品名から探す</h3>
-  <%= form_with url: user_items_path, method: :get do |f| %>
-    <div>
-      <%= f.label :keyword, '商品名' %>
-      <%= f.text_field :keyword, value: @keyword, placeholder: "投稿を検索する" %>
+<div class= 'container'>
+  <div class ='row mb-5'>
+    <div class ='col-4 offset-1'>
+      <h4 class = 'text-bg-danger'>商品名から探す</h4>
     </div>
-    <div>
-      <%= f.submit "検索" %>
+    <div class ='col-7'>
+      <%= form_with url: user_items_path, method: :get do |f| %>
+        <%= f.text_field :keyword, value: @keyword, placeholder: "商品名"%>
+        <%= f.submit "検索" %>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
 
-<div>
-  <h3>ジャンルから探す</h3>
-  <%= form_with url: user_items_path, method: :get do |f| %>
-    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
-    <%= f.submit '検索' %>
-  <% end %>
-</div>
+  <div class ='row mb-5'>
+    <div class ='col-4 offset-1'>
+      <h4>ジャンルから探す</h4>
+    </div>
+    <div class ='col-7'>
+      <% @genres.each do |genre| %>
+        <%= link_to user_items_path(genre_id: genre.id), class: 'text-dark' do %>
+          <botton type="button" class="btn btn-outline-secondary btn-sm"><%= genre.name %></botton>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-<div>
-  <h3>ランキングから探す</h3><!-- 3位までの表示にしたい-->
-  <% @ranks.each.with_index(1) do |item, i|%>
-  <h5>第<%= i %>位</h5>
+  <div class ='row mb-5'>
+    <div class ='col-4 offset-1'>
+      <h4>ランキングから探す</h4>
+    </div>
+  </div>
+
+  <div class ='row justfy-content-center'>
+  <% @ranks.each.with_index(1) do |item, i| %>
+    <div class ='col-4 text-align-center border'>
+      <p>第<%= i %>位</p>
+      <div class = 'card　justfy-content-center'>
+        <%= link_to user_item_path(item.id), class: 'mx-auto d-block' do %>
+          <%= image_tag item.image, size: "150x150" %>
+        <% end %>
+      </div>
       <ul>
-        <li　class="list-unstyled">
-          商品名：<%= link_to user_item_path(item.id) do %>
-                    <%= item.name %>
-                  <% end %></li>
-        <li　class="list-unstyled">メーカー：<%= item.maker %></li>
-        <li　class="list-unstyled">発売日：<%= item.release_date.to_date %></li>
-        <div id="star-average<%= item.id %>">総合評価平均：<%= item.reviews.average(:star) %>点
-          <script>
-            $('#star-average<%= item.id %>').raty({
-                size      : 20,
-                starOff   : '<%= asset_path('star-off.png') %>',
-                starOn    : '<%= asset_path('star-on.png') %>',
-                starHalf  : '<%= asset_path('star-half.png') %>',
-                half      : true,
-                readOnly  : true,
-                score: <%= item.reviews.average(:star) %>,
-              });
-          </script>
-        </div>
+        <li　class=" card-body list-unstyled"><strong>
+          <%= link_to user_item_path(item.id), class:" card-title text-dark" do %>
+           <%= item.name %></strong>
+          <% end %>
+        </li>
+        <li class ="list-unstyled card-text">メーカー：<%= item.maker %></li>
+        <li class ="list-unstyled card-text">発売日：<%= item.release_date.to_date %></li>
       </ul>
+      <div id="star-average<%= item.id %>">総合評価平均：<%= item.reviews.average(:star).round(2) %>点
+        <script>
+          $('#star-average<%= item.id %>').raty({
+              size      : 20,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              starHalf  : '<%= asset_path('star-half.png') %>',
+              half      : true,
+              readOnly  : true,
+              score: <%= item.reviews.average(:star) %>,
+            });
+        </script>
+      </div>
+    </div>
   <% end %>
+  </div>
 
-  <p><%= link_to 'もっと見る', user_ranks_rank_path %></p>
+  <div class = 'row offset-10'>
+    <%= link_to '>>3位以降を見る', user_ranks_rank_path, class: 'text-secondary' %></div>
+  </div>
+
 </div>

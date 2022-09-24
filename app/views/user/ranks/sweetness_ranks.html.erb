@@ -9,6 +9,6 @@
         </li>
         <li　class="list-unstyled">メーカー：<%= item.maker %></li>
         <li　class="list-unstyled">発売日：<%= item.release_date %></li>
-        <li　class="list-unstyled">甘味:<%= item.reviews.average(:swweetnwss)%></li>
+        <li　class="list-unstyled">甘味:<%= item.reviews.average(:sweetness)%></li>
       </ul>
 <% end %>

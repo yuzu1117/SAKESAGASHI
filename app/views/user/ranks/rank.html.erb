@@ -1,6 +1,7 @@
-<%= link_to '酸味のランキング', user_ranks_sourness_ranks_path %>
-<%= link_to '甘味のランキング', user_ranks_sweetness_ranks_path %>
-<%= link_to '苦味のランキング', user_ranks_bitterness_ranks_path %>
+<p>味ごとののランキングはこちらから↓</p>
+<%= link_to '酸味のランキング', user_ranks_sourness_ranks_path, class: 'text-dark' %>
+<%= link_to '甘味のランキング', user_ranks_sweetness_ranks_path, class: 'text-dark' %>
+<%= link_to '苦味のランキング', user_ranks_bitterness_ranks_path, class: 'text-dark' %>
 
 <h3>総合評価</h3>
 <% @ranks.each.with_index(1) do |item, i|%>

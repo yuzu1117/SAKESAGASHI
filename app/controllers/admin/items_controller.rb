@@ -10,6 +10,7 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "商品が登録されました。"
       redirect_to admin_items_path
     else
+      flash[:notice] = "商品が登録できませんでした。"
       render action: :new
     end
   end
@@ -32,6 +33,7 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "商品情報を変更しました。"
       redirect_to admin_item_path(item.id)
     else
+      flash[:notice] = "商品情報を変更できませんでした。"
       render action: :edit
     end
   end
@@ -42,6 +44,7 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "商品を削除しました。"
       redirect_to admin_items_path
     else
+      flash[:notice] = "商品を削除できませんでした。"
       render admin_item_path(item.id)
     end
   end

@@ -16,6 +16,7 @@ class User::ReviewsController < ApplicationController
       flash[:notice] = "レビューが投稿されました。"
       redirect_to user_item_path(item.id)
     else
+      flash[:notice] = "レビューが投稿できませんでした。"
       render :new
     end
   end

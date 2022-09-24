@@ -1,24 +1,29 @@
-
+<div class = 'container'>
  <%= form_with model: @review, url: user_item_reviews_path, method: :post do |f| %>
    <%= f.hidden_field :item_id %>
    <%= f.hidden_field :user_id %>
 
-    <!-- 星評価 -->
+   <!-- 星評価 -->
+    <a class= 'text-danger'>*</a><a>マークは必須項目です</a>
+    <div class = 'mt-3'>
     <div id="star-rate">
-      <%= f.label :star,'評価 '%>
+      <label><a class = 'text-danger'>*</a><strong>総合評価</strong></label>
       <%= f.hidden_field :star, id: :star %>
       <script>
         $('#star-rate').raty({
-          size     : 50,
-          starOff  : '<%= asset_path('star-off.png') %>',
-          starOn   : '<%= asset_path('star-on.png') %>',
-          starHalf : '<%= asset_path('star-half.png') %>',
+          size     : 38,
+          starOff  : '<%= asset_path('star-off.png')%>',
+          starOn   : '<%= asset_path('star-on.png')%>',
+          starHalf : '<%= asset_path('star-half.png')%>',
           scoreName: 'review[star]',
           half: true,
         });
       </script>
     </div>
+    </div>
+
     <div>
+      <a class = 'text-danger'>*</a><strong>味</strong>
       <%= f.label :sharpness, 'キレ' %>
       <%= f.number_field :sharpness, min:0,max:5 %>
       <%= f.label :rich, 'コク' %>
@@ -31,26 +36,24 @@
       <%= f.number_field :bitterness, min:0,max:5 %>
     </div>
 
-    <div class = "form_group" >
-        <%= f.label :content, '感想' %>
-        <%= f.text_area :content %>
-    </div>
-     <div class = "form_group" >
-        <%= f.label :food, 'おすすめおつまみ' %>
-        <%= f.text_area :food %>
-    </div>
-     <div class = "form_group" >
-        <%= f.label :situation, 'こんな時におすすめ！' %>
-        <%= f.text_area :situation %>
+    <div class = "form_group mb-2" >
+        <label><a class = 'text-danger'>*</a><strong>感想</strong></label>
+        <%= f.text_area :content, size: "10x5", class: "form-control", placeholder: '500字以内で入力してください' %>
     </div>
 
-    <div>
-      <%= f.submit "投稿" %>
+     <div class = "form_group mb-2" >
+        <label><strong>おすすめおつまみ</strong></label>
+        <%= f.text_area :food, size: "2x2", class: "form-control", placeholder: '200字以内で入力してください'%>
     </div>
 
-    <!-- 評価javascript -->
+     <div class = "form_group mb-2" >
+        <label><strong>こんな時におすすめ！</strong>（一人でしっぽり、友達とワイワイなど）</label>
+        <%= f.text_area :situation, size: "2x2", class: "form-control", placeholder: '200字以内で入力してください' %>
+    </div>
 
-
-
+    <div class = 'col offset-11'>
+      <%= f.submit "投稿", class: 'btn btn-lg btn-outline-danger' %>
+    </div>
 
   <% end %>
+</div>

@@ -6,8 +6,14 @@ class User::ReviewCommentsController < ApplicationController
     review = Review.find(params[:review_id])
     review_comment = current_user.review_comment.new(review_comment_params)
     review_comment.review_id = review.id
-    review_comment.save
-    redirect_to user_item_review_path(review.item.id,review.id)
+    if review_comment.save
+      flash[:notice] = "コメントが投稿されました。"
+      redirect_to user_item_review_path(review.item.id,review.id)
+    else
+      flash[:notice] = "コメントが投稿できませんでした。"
+      redirect_to user_item_review_path(review.item.id,review.id)
+    end
+
   end
 
   protected

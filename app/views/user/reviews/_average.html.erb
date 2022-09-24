@@ -1,8 +1,8 @@
 <div>
-  <div id="star-average<%= @item.id %>"></div>
+  <div id="star-average<%= @item.id %>">
   <script>
     $('#star-average<%= @item.id %>').raty({
-        size      : 20,
+        size      : 48,
         starOff   : '<%= asset_path('star-off.png') %>',
         starOn    : '<%= asset_path('star-on.png') %>',
         starHalf  : '<%= asset_path('star-half.png') %>',
@@ -11,16 +11,16 @@
         score: <%= @average %>,
       });
   </script>
+   <%= @average %>
+  </div>
 
-  平均：<%= @average %>点
-  <!-- 味の平均値の表示　-->
   <div>
-    <ul>
-      <li>キレ：<%= @ave_sharpness %></li>
-      <li>コク：<%= @ave_rich %></li>
-      <li>酸味：<%= @ave_sourness %></li>
-      <li>甘味：<%= @ave_sweetness %></li>
-      <li>苦味：<%= @ave_bitterness %></li>
+    <ul class="list-group list-group-horizontal">
+      <li class ="list-group-item">キレ：<%= @ave_sharpness %></li>
+      <li class ="list-group-item">コク：<%= @ave_rich %></li>
+      <li class ="list-group-item">酸味：<%= @ave_sourness %></li>
+      <li class ="list-group-item">甘味：<%= @ave_sweetness %></li>
+      <li class ="list-group-item">苦味：<%= @ave_bitterness %></li>
     </ul>
   </div>
 

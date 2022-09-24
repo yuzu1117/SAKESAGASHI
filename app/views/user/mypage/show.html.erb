@@ -1,53 +1,86 @@
-<h4>マイページ</h4>
+<div class = 'container'>
+  <div class = 'row'>
+    <div class = 'col-3'>
+      <h5>プロフィール</h5>
+      <% if @user.name != "guestuser" %>
+      <table class= 'table'>
+        <tr>
+          <th>名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>ニックネーム</th>
+          <td><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+      </table>
+    <div>
+      <%= link_to '編集する', edit_user_mypage_path, class:"btn btn-outline-secondary" %>
+      <%= link_to '退会する', user_unsubscribe_path, class:"btn btn-outline-danger" %>
+    </div>
+    <!--ゲストユーザーログインの場合-->
+    <% else %>
+      <table class= 'table'>
+        <tr>
+          <th>名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+      </table>
+    <% end %>
+    </div>
 
-<% if @user.name != "guestuser" %>
-  <li>名前：<%= @user.name %></li>
-  <li>表示名：<%= @user.nickname %></li>
-  <li>メールアドレス：<%= @user.email %></li>
 
-  <%= link_to '編集する', edit_user_mypage_path, class:"btn btn-outline-warning" %>
-  <%= link_to '退会する', user_unsubscribe_path, class:"btn btn-outline-danger" %>
+    <div class = 'col-9'>
+      <h5>わたしのレビュー</h5>
+      <div class = 'row table-responsive'>
+        <table class = 'table align-middle'>
+          <tbody>
+            <% @reviews.each do |review| %>
+            <tr>
+              <td><%= image_tag review.item.image,size: "100x100" %></td>
+              <td class = 'align-middle'><%= review.item.name %></td>
+              <td class = 'align-middle'><%= review.created_at %></td>
+              <td class = 'align-middle' id="star-rate<%= review.id %>">
+                <script>
+                  $('#star-rate<%= review.id %>').raty({
+                    size      : 20,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    starHalf  : '<%= asset_path('star-half.png') %>',
+                    half      : true,
+                    readOnly  : true,
+                    score     : <%= review.star %>,
+                  });
+                </script>
+                <%= review.star %>
+              </td>
+              <td class = 'align-middle'><%= link_to '詳しく見る', user_item_review_path(review.item.id, review.id), class: 'text-primary'%></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
 
-<% else %>
-  <h3>ゲストユーザー</h3>
+    <h5>わたしのコメント</h5>
+    <div class = 'row'>
+      <% @review_comments.each do |review_comment| %>
+        <table class = 'table'>
+          <tr>
+            <td><%= review_comment.review.content %></td>
+            <td><%= review_comment.created_at %></td>
+            <td><%= review_comment.comment %></td>
+            <td><%= link_to '詳しく見る', user_item_review_path(review_comment.review.item.id, review_comment.review.id)%></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
 
-<% end %>
-
-
-<div>
-  <h4>私のレビュー</h4>
-  <tabel>
-  <% @reviews.each do |review| %>
-    <tr>
-      <td><%= image_tag review.item.image,size: "200x200" %></td>
-      <td><%= review.item.name %></td>
-      <td>
-        <div id="star-rate<%= review.id %>"></div>
-        <script>
-          $('#star-rate<%= review.id %>').raty({
-            size      : 20,
-            starOff   : '<%= asset_path('star-off.png') %>',
-            starOn    : '<%= asset_path('star-on.png') %>',
-            starHalf  : '<%= asset_path('star-half.png') %>',
-            half      : true,
-            readOnly  : true,
-            score     : <%= review.star %>,
-          });
-        </script>
-      </td>
-      <td><%= link_to "詳しく見る", user_item_review_path(review.item.id, review.id) %></td>
-    </tr>
-  <% end %>
+  </div>
 </div>
 
-<div>
-  <h4>私のコメント</h4>
-   <% @review_comments.each do |review_comment| %>
-    <tr>
-      <td><%= review_comment.review.user.nickname %></td>
-      <td><%= review_comment.comment %></td>
-    </tr>
-  <% end %>
-</div>
 
 
