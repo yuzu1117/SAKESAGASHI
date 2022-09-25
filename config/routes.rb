@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root to: 'user/homes#top'
 
   namespace :admin do
-    resources :items
+    resources :items, except: [:show]
     resources :genres, except: [:new, :show]
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :destroy]

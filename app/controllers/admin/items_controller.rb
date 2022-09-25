@@ -19,10 +19,6 @@ class Admin::ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
-
   def edit
     @item = Item.find(params[:id])
   end
@@ -31,7 +27,7 @@ class Admin::ItemsController < ApplicationController
     item = Item.find(params[:id])
     if item.update(item_params)
       flash[:notice] = "商品情報を変更しました。"
-      redirect_to admin_item_path(item.id)
+      redirect_to admin_items_path
     else
       flash[:notice] = "商品情報を変更できませんでした。"
       render action: :edit

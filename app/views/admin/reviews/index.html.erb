@@ -1,31 +1,33 @@
-<h1>レビュー一覧</h1>
-
-<div>
-  <% @reviews.each do |review| %>
-  <table>
-    <thead>
+<label><h5>レビュー一覧</h5></label>
+  <table class = 'table border'>
+    <thead class = 'table-primary text-center'>
       <tr>
         <th>ユーザー</th>
         <th>投稿日時</th>
         <th>商品</th>
         <th>評価</th>
-        <th>内容</th>
+        <th width = '25%'>内容</th>
         <th>おつまみ</th>
         <th>シチュエーション</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
+      <% @reviews.each do |review| %>
       <tr>
-        <th><%= review.user.name %></th>
-        <th><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></th>
-        <th><%= review.item.name %></th>
-        <th><%= review.star %>点</th>
-        <th><%= review.content %></th>
-        <th><%= review.food %></th>
-        <th><%= review.situation %></th>
-        <th><%= link_to '削除', admin_review_path(review.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
+        <td>
+          <%= link_to admin_user_path(review.user.id) do%>
+           <%= review.user.name %>
+          <% end %>
+        </td>
+        <td><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= review.item.name %></td>
+        <td><%= review.star %>点</td>
+        <td><%= review.content %></td>
+        <td><%= review.food %></td>
+        <td><%= review.situation %></td>
+        <td><%= link_to '削除', admin_review_path(review.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
-  <% end %>
-</div>

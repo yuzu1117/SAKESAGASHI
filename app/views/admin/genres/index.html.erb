@@ -3,11 +3,11 @@
     <div class='col-md-6 offset-md-3'>
     <%= form_with model: @genre, url:"/admin/genres", method: :post do |f| %>
       <div class="form-group">
-        <%= f.label :name,"ジャンル名",class: "h4 text-success" %>
-        <%= f.text_field :name, class: 'form-control border-success' %>
+        <%= f.label :name,"ジャンル名",class: "h4" %>
+        <%= f.text_field :name, class: 'form-control' %>
       </div>
       <div class="text-right">
-        <%= f.submit '登録' %>
+        <%= f.submit '登録' , class: 'btn btn-primary' %>
       </div>
     <% end %>
     <br>
@@ -17,8 +17,8 @@
         <tr>
           <th scope="row"></th>
           <td><%= genre.name %></td>
-          <td><%= link_to "編集する",  edit_admin_genre_path(genre.id) %></td>
-          <td><%= link_to "削除する",  admin_genre_path(genre.id), method: :delete, "data-confirm" => "このジャンルを削除してよろしいですか？" %></td>
+          <td><%= link_to "編集する",  edit_admin_genre_path(genre.id), class: 'btn btn-sm btn-outline-primary' %></td>
+          <td><%= link_to "削除する",  admin_genre_path(genre.id), method: :delete, "data-confirm" => "このジャンルを削除してよろしいですか？", class: 'btn btn-sm btn-outline-danger' %></td>
         </tr>
       <% end %>
       </tbody>
