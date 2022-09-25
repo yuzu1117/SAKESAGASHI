@@ -5,7 +5,7 @@
     </div>
 
     <div class = 'col-10'>
-    <%= form_with model: @user, url: user_mypage_path, method: :patch do |f| %>
+    <%= form_with model: @user, url: user_mypage_path(current_user.id), method: :patch do |f| %>
       <div class="form-group">
         <strong>名前</strong>
         <%= f.text_field :name, size: "1x1", class: "form-control" %>

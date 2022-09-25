@@ -15,7 +15,7 @@ class User::MypageController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "会員情報が変更されました。"
-      redirect_to user_mypage_path(user.id)
+      redirect_to user_mypage_path(@user.id)
     else
       render :edit
     end
