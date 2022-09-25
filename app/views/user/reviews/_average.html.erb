@@ -1,5 +1,5 @@
-<div>
-  <div id="star-average<%= @item.id %>">
+
+<div id="star-average<%= @item.id %>">
   <script>
     $('#star-average<%= @item.id %>').raty({
         size      : 48,
@@ -11,18 +11,17 @@
         score: <%= @average %>,
       });
   </script>
-   <%= @average %>
-  </div>
-
-  <div>
-    <ul class="list-group list-group-horizontal">
-      <li class ="list-group-item">キレ：<%= @ave_sharpness %></li>
-      <li class ="list-group-item">コク：<%= @ave_rich %></li>
-      <li class ="list-group-item">酸味：<%= @ave_sourness %></li>
-      <li class ="list-group-item">甘味：<%= @ave_sweetness %></li>
-      <li class ="list-group-item">苦味：<%= @ave_bitterness %></li>
-    </ul>
-  </div>
-
-
+  <%= @average %>
+  <div>（<%= @item.reviews.count %>件のレビュー）</div>
 </div>
+
+<div class = 'row mt-3'>
+  <ul class="list-group list-group-horizontal">
+    <li class ="list-group-item">キレ：<%= @ave_sharpness %></li>
+    <li class ="list-group-item">コク：<%= @ave_rich %></li>
+    <li class ="list-group-item">酸味：<%= @ave_sourness %></li>
+    <li class ="list-group-item">甘味：<%= @ave_sweetness %></li>
+    <li class ="list-group-item">苦味：<%= @ave_bitterness %></li>
+  </ul>
+</div>
+

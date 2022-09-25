@@ -1,20 +1,19 @@
 class User::MypageController < ApplicationController
 
+  before_action :set_current_user
+  before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit]
 
   def show
-    @user = User.find(params[:id])
     @reviews = @user.reviews.all
     @review_comments =@user.review_comment.all
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    user = User.find(params[:id])
-    if user.update(user_params)
+    if @user.update(user_params)
       flash[:notice] = "会員情報が変更されました。"
       redirect_to user_mypage_path(user.id)
     else
@@ -22,8 +21,8 @@ class User::MypageController < ApplicationController
     end
   end
 
+#退会用
   def withdrawal
-    @user = User.find(params[:id])
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @user.update(is_deleted: true)
     reset_session
@@ -35,6 +34,10 @@ class User::MypageController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :nickname, :email,:is_deleted)
+  end
+
+  def set_current_user
+    @user = current_user
   end
 
   def ensure_guest_user

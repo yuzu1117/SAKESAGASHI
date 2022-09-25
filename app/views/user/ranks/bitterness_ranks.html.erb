@@ -1,14 +1,32 @@
-<h3>苦味</h3>
-<% @bitterness_ranks.each.with_index(1) do |item, i|%>
-  <h5>第<%= i %>位</h5>
-      <ul>
-        <li　class="list-unstyled">商品名：
-        <%= link_to user_item_path(item.id) do %>
-          <%= item.name %>
+<div class = 'container'>
+  <div class = 'row'>
+    <h5><%= link_to '総合ランキング', user_ranks_rank_path, class: 'text-dark' %> /
+    <%= link_to '酸味ランキング', user_ranks_sourness_ranks_path, class: 'text-dark' %> /
+    <%= link_to '甘味ランキング', user_ranks_sweetness_ranks_path, class: 'text-dark' %></5>
+  </div>
+
+  <div class = 'row mt-3'>
+    <% @bitterness_ranks.each.with_index(1) do |item, i|%>
+    <div class ='col-3 text-align-center border'>
+      <p>第<%= i %>位</p>
+      <div class = 'card'>
+        <%= link_to user_item_path(item.id), class: 'mx-auto d-block' do %>
+          <%= image_tag item.image, size: "150x150" %>
         <% end %>
+      </div>
+      <ul class = 'card-body text-center'>
+        <li　class = "card-title ist-unstyled"><strong>
+          <%= link_to user_item_path(item.id), class: "card-title text-dark" do %>
+           <%= item.name %></strong>
+          <% end %>
         </li>
-        <li　class="list-unstyled">メーカー：<%= item.maker %></li>
-        <li　class="list-unstyled">発売日：<%= item.release_date %></li>
-        <li　class="list-unstyled">苦味:<%= item.reviews.average(:bitterness)%></li>
+        <li class ="list-unstyled card-text">メーカー：<%= item.maker %></li>
+        <li class ="list-unstyled card-text">発売日：<%= item.release_date %></li>
       </ul>
-<% end %>
+      <h5 class = 'text-center'>苦味：<%= item.reviews.average(:bitterness).round(2) %></h5>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+

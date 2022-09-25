@@ -8,18 +8,19 @@
       <% end %>
     </div>
 
-    <div class ='col-8 mt-5'>
+    <div class ='col-7 offset-1 mt-5'>
       <ul>
-        <li　class="list-unstyled"><h2>
+        <li class="list-unstyled"><h2>
           <%= link_to user_item_path(@review.item.id), class: 'text-dark' do %>
             <%= @review.item.name %>
           <% end %>
         </li>
-        <li　class="list-unstyled"><h4><%= @review.item.maker %></li>
-        <li　class="list-unstyled"><h4><%= @review.item.release_date %></li>
+        <li　class="list-unstyled"><h4>メーカー：<%= @review.item.maker %></li>
+        <li　class="list-unstyled"><h4>発売日：<%= @review.item.release_date %></li>
       </ul>
-
-      <div>
+      <div class= 'offset-1'>
+        投稿者：<%= @review.user. nickname %>
+        投稿日時：<%= @review.created_at.strftime("%Y-%m-%d %H:%M") %>
         <div id="star-rate<%= @review.id %>">
           <script>
             $('#star-rate<%= @review.id %>').raty({
@@ -44,47 +45,60 @@
             <li class ="list-group-item">苦味：<%= @review.bitterness %></li>
           </ul>
         </div>
-
       </div>
-    </div>
-  </div>
 
-  <div class = 'row'>
-    感想：<%= @review.content %>
-  </div>
-  <div class = 'row'>
-    おすすめおつまみ：
-      <% if @review.food.present? %>
-        <%= @review.food %>
-      <% end %>
-  </div>
-  <div>
-    こんな時におすすめ！：
-      <% if @review.situation.present? %>
-        <%= @review.situation %>
-      <% end %>
-  </div>
-
-
-  <div class = 'row'>
-    <div class = 'col'>
-        <p>コメント数：<%= @review.review_comments.count %>件</p>
-        <% @review.review_comments.each do |review_comment| %>
-          <%= review_comment.user.nickname %>
-          <%= review_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= review_comment.comment %>
-        <% end %>
+      <div class = 'row offset-1 mt-5 table-responsive' >
+        <table class = 'table'>
+          <tr>
+            <th style="width: 30%">感想</th>
+            <td><%= @review.content %></td>
+          </tr>
+          <tr>
+            <th>おすすめおつまみ</th>
+            <td>
+              <% if @review.food.present? %>
+                <%= @review.food %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>こんな時におすすめ！</th>
+            <td>
+              <% if @review.situation.present? %>
+                <%= @review.situation %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
-      <!--ユーザーがサインインしてたらコメントできる-->
-      <% if user_signed_in? %>
+
       <div>
-        <%= form_with model:[@review, @review_comment], url: user_item_review_review_comments_path(@review.item.id, @review.id, @review_comment.id), method: :post do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
+        <div class = 'row offset-1 justify-content-end'>
+          <% @review.review_comments.each do |review_comment| %>
+          <ul>
+            <li class="list-unstyled">投稿者：<%= review_comment.user.nickname %> /
+            投稿日時：<%= review_comment.created_at.strftime("%Y-%m-%d %H:%M") %></li>
+            <li class="list-unstyled">コメント：<%= review_comment.comment %></li>
+          </ul>
+          <% end %>
+        </div>
+       <!--ユーザーがサインインしてたらコメントできる-->
+        <% if user_signed_in? %>
+          <%= form_with model:[@review, @review_comment], url: user_item_review_review_comments_path(@review.item.id, @review.id, @review_comment.id), method: :post do |f| %>
+          <div class = 'row offset-1 form-group justfy-content-end'>
+            <%= f.label :content, 'コメント' %>
+            <%= f.text_area :comment, rows: '5', placeholder: "200字以内で入力してください", class: 'form-control', size: '100×150' %>
+            <%= f.submit "コメントする", class: 'btn btn-outline-secondary' %>
+          <% end %>
+          </div>
+        <% else %>
+         <p>コメントをするには<%= link_to '新規登録', new_user_registration_path %>もしくは<%= link_to 'ログイン', new_user_session_path %>が必要です。</p>
         <% end %>
-      <% else %>
-       <p>コメントをするには<%= link_to '新規登録', new_user_registration_path %>もしくは<%= link_to 'ログイン', new_user_session_path %>が必要です。</p>
-      <% end %>
+
+
       </div>
     </div>
+
+  </div>
 </div>
+

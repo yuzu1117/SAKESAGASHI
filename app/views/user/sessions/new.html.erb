@@ -1,15 +1,17 @@
 <div class = "container">
   <div class = "row mt-5">
-
-    <div class = "col offset-4">
+    <h5>ログイン</h5>
+    <div class = "col offset-1 form-goup">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
       <div class="field  pb-3">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" , placeholder: "メールアドレス"%>
+        <%= f.label :email, 'メールアドレス'  %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
       </div>
 
       <div class="field  pb-3">
-        <%= f.password_field :password, autocomplete: "current-password" , placeholder: "パスワード"%>
+        <%= f.label :password %><br>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control'  %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -20,12 +22,16 @@
       <% end %>
 
       <div class="actions pb-5">
-        <%= f.submit "ログイン", class: 'btn btn-outline-warning' %>
+        <%= f.submit "ログイン", class: 'btn btn-outline-danger' %>
       </div>
     <% end %>
 
-    <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
-    <p>新規登録は<%= link_to 'こちらから', new_user_registration_path, class: "text-dark" %></p>
+      <div class = 'mb-1'>
+        <h5>試しに使ってみたい方はこちら>>
+          <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-outline-secondary", method: :post %></h5>
+        <p>※通常の会員同様、レビューやコメントができます。</p>
+      </div>
+
     </div>
   </div>
 </div>

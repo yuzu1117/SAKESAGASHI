@@ -8,14 +8,21 @@
       <% end %>
     </div>
 
-    <div class ='col-8 mt-5'>
-      <ul>
-        <li　class="list-unstyled"><h2><%= @item.name %></li>
-        <li　class="list-unstyled"><h4><%= @item.maker %></li>
-        <li　class="list-unstyled"><h4><%= @item.release_date %></li>
-      </ul>
+    <div class ='col-8 offset-1 mt-5'>
+
+      <h2><%= @item.name %></h2>
+      <h4>メーカー：<%= @item.maker %></h4>
+      <h4>発売日：<%= @item.release_date %></h4>
+
+    <% if @item.reviews != [] %>
       <%= render 'user/reviews/average' %>
-      <%= link_to 'レビューをする', new_user_item_review_path(@item.id), class: 'btn btn-secondary' %>
+    <% else %>
+      <h5>レビューは0件です。</h5>
+    <% end %>
+      <br>
+      <div>
+        <%= link_to 'レビューをする', new_user_item_review_path(@item.id), class: 'btn btn-secondary' %>
+      </div>
     </div>
   </div>
 

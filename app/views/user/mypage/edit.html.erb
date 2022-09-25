@@ -1,19 +1,29 @@
-<h1>会員情報編集</h1>
+<div class ='container'>
+  <div class = 'row'>
+    <div class = 'col-2'>
+      <h5>会員情報編集</h5>
+    </div>
 
-<%= form_with model: @user, url: user_mypage_path, method: :patch do |f| %>
-  <div class="form-group col-6">
-    <strong>氏名</strong>
-    <%= f.text_field :name, class: "form-control border-warning" %>
-  </div>
-  <div>
-    表示名
-    <%= f.text_field :nickname, class: "form-control border-warning" %>
-  </div>
-  <div>
-    メールアドレス
-    <%= f.text_field :email, class: "form-control border-warning" %>
-  </div>
+    <div class = 'col-10'>
+    <%= form_with model: @user, url: user_mypage_path, method: :patch do |f| %>
+      <div class="form-group">
+        <strong>名前</strong>
+        <%= f.text_field :name, size: "1x1", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <strong>ニックネーム</strong>
+        <%= f.text_field :nickname, size: "1x1", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <strong>メールアドレス</strong>
+        <%= f.text_field :email, size: "1x1", class: "form-control" %>
+      </div>
 
-  <%= f.submit '変更する' %>
-<% end %>
-
+      <div class = 'offset-9 pr-2 mt-5'>
+      <%= link_to '変更しない', user_mypage_path(current_user.id), class: 'btn btn-outline-secondary' %>
+      <%= f.submit '変更する', class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+     </div>
+  </div>
+</div>

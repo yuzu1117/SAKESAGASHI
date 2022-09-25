@@ -1,4 +1,5 @@
 <div class = 'container'>
+
   <div class = 'row'>
     <div class = 'col-3'>
       <h5>プロフィール</h5>
@@ -32,7 +33,7 @@
     <% end %>
     </div>
 
-
+<!--レビュー一覧-->
     <div class = 'col-9'>
       <h5>わたしのレビュー</h5>
       <div class = 'row table-responsive'>
@@ -41,8 +42,11 @@
             <% @reviews.each do |review| %>
             <tr>
               <td><%= image_tag review.item.image,size: "100x100" %></td>
-              <td class = 'align-middle'><%= review.item.name %></td>
-              <td class = 'align-middle'><%= review.created_at %></td>
+              <td class = 'align-middle'>
+                <%= link_to user_item_path(review.item.id), class: 'text-dark' do%>
+                  <%= review.item.name %>
+                <% end %></td>
+              <td class = 'align-middle'><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></td>
               <td class = 'align-middle' id="star-rate<%= review.id %>">
                 <script>
                   $('#star-rate<%= review.id %>').raty({
@@ -57,27 +61,27 @@
                 </script>
                 <%= review.star %>
               </td>
-              <td class = 'align-middle'><%= link_to '詳しく見る', user_item_review_path(review.item.id, review.id), class: 'text-primary'%></td>
+              <td class = 'align-middle'><%= link_to '詳しく見る', user_item_review_path(review.item.id, review.id) %></td>
             </tr>
           <% end %>
           </tbody>
         </table>
       </div>
 
-    <h5>わたしのコメント</h5>
-    <div class = 'row'>
-      <% @review_comments.each do |review_comment| %>
-        <table class = 'table'>
-          <tr>
-            <td><%= review_comment.review.content %></td>
-            <td><%= review_comment.created_at %></td>
-            <td><%= review_comment.comment %></td>
-            <td><%= link_to '詳しく見る', user_item_review_path(review_comment.review.item.id, review_comment.review.id)%></td>
-          </tr>
-        </table>
-      <% end %>
+<!--コメント一覧-->
+      <h5>わたしのコメント</h5>
+      <div class = 'row'>
+        <% @review_comments.each do |review_comment| %>
+          <table class = 'table'>
+            <tr>
+              <td style="width: 30%"><%= review_comment.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= review_comment.comment %></td>
+              <td style="width: 30%"><%= link_to '詳しく見る', user_item_review_path(review_comment.review.item.id, review_comment.review.id) %></td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
     </div>
-  </div>
 
   </div>
 </div>

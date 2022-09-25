@@ -21,14 +21,16 @@ class User::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @reviews = @item.reviews.all
-    #星の平均値を出すメソッド
-    @average = @item.reviews.average(:star).round(2)
-    #味の平均値を出すメソッド
-    @ave_sharpness = @reviews.average(:sharpness).round(2)
-    @ave_rich = @reviews.average(:rich).round(2)
-    @ave_sourness = @reviews.average(:sourness).round(2)
-    @ave_sweetness = @reviews.average(:sweetness).round(2)
-    @ave_bitterness = @reviews.average(:bitterness).round(2)
+    if @reviews != []
+      #星の平均値を出すメソッド
+      @average = @item.reviews.average(:star).round(2)
+      #味の平均値を出すメソッド
+      @ave_sharpness = @reviews.average(:sharpness).round(2)
+      @ave_rich = @reviews.average(:rich).round(2)
+      @ave_sourness = @reviews.average(:sourness).round(2)
+      @ave_sweetness = @reviews.average(:sweetness).round(2)
+      @ave_bitterness = @reviews.average(:bitterness).round(2)
+    end
   end
 
  protected

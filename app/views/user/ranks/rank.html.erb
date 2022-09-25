@@ -1,32 +1,45 @@
-<p>味ごとののランキングはこちらから↓</p>
-<%= link_to '酸味のランキング', user_ranks_sourness_ranks_path, class: 'text-dark' %>
-<%= link_to '甘味のランキング', user_ranks_sweetness_ranks_path, class: 'text-dark' %>
-<%= link_to '苦味のランキング', user_ranks_bitterness_ranks_path, class: 'text-dark' %>
+<div class = 'container'>
+  <div class = 'row'>
+    <h5><%= link_to '酸味のランキング', user_ranks_sourness_ranks_path, class: 'text-dark' %> /
+    <%= link_to '甘味のランキング', user_ranks_sweetness_ranks_path, class: 'text-dark' %> /
+    <%= link_to '苦味のランキング', user_ranks_bitterness_ranks_path, class: 'text-dark' %></5>
+  </div>
 
-<h3>総合評価</h3>
-<% @ranks.each.with_index(1) do |item, i|%>
-  <h5>第<%= i %>位</h5>
-      <ul>
-        <li　class="list-unstyled">商品名：
-        <%= link_to user_item_path(item.id) do %>
-          <%= item.name %>
+  <div class ='row mt-3'>
+  <% @ranks.each.with_index(1) do |item, i| %>
+    <div class ='col-3 text-align-center border'>
+      <p>第<%= i %>位</p>
+      <div class = 'card'>
+        <%= link_to user_item_path(item.id), class: 'mx-auto d-block' do %>
+          <%= image_tag item.image, size: "150x150" %>
         <% end %>
+      </div>
+      <ul class = 'card-body text-center'>
+        <li　class = "card-title ist-unstyled"><strong>
+          <%= link_to user_item_path(item.id), class: "card-title text-dark" do %>
+           <%= item.name %></strong>
+          <% end %>
         </li>
-        <li　class="list-unstyled">メーカー：<%= item.maker %></li>
-        <li　class="list-unstyled">発売日：<%= item.release_date %></li>
-        <div id="star-average<%= item.id %>">総合評価平均：<%= item.reviews.average(:star) %>点
-          <script>
-            $('#star-average<%= item.id %>').raty({
-                size      : 20,
-                starOff   : '<%= asset_path('star-off.png') %>',
-                starOn    : '<%= asset_path('star-on.png') %>',
-                starHalf  : '<%= asset_path('star-half.png') %>',
-                half      : true,
-                readOnly  : true,
-                score: <%= item.reviews.average(:star) %>,
-              });
-          </script>
-        </div>
+        <li class ="list-unstyled card-text">メーカー：<%= item.maker %></li>
+        <li class ="list-unstyled card-text">発売日：<%= item.release_date %></li>
+        <br>
+        <li class ="list-unstyled card-text" id="star-average<%= item.id %>">
+        <script>
+          $('#star-average<%= item.id %>').raty({
+              size      : 20,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              starHalf  : '<%= asset_path('star-half.png') %>',
+              half      : true,
+              readOnly  : true,
+              score: <%= item.reviews.average(:star) %>,
+            });
+        </script>
+        <%= item.reviews.average(:star).round(2) %>
+        </li>
       </ul>
-<% end %>
+    </div>
+  <% end %>
+  </div>
+
 
