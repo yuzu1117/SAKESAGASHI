@@ -10,9 +10,10 @@ class User::ItemsController < ApplicationController
 
   def index
     keyword = params[:keyword]
-    @items = Item.where("name LIKE(?)", "%#{keyword}%")
+    if params[:keyword]
+       @items = Item.where("name LIKE(?)", "%#{keyword}%")
     #ジャンル検索
-    if params[:genre_id]
+    else params[:genre_id]
        @genre = Genre.find(params[:genre_id])
        @items = @genre.items.all
     end

@@ -42,7 +42,7 @@
              </td>
              <td class = 'align-middle'>
                <%= link_to '編集する', edit_admin_item_path(item.id), class: 'btn btn-outline-primary btn-sm' %>
-               <%= link_to '削除する', admin_item_path(item.id), method: :delete, deta: { confirm: 'この商品を削除しますか？'}, class: 'btn btn-outline-danger btn-sm'%>
+               <%= link_to '削除する', admin_item_path(item.id), method: :delete, deta: { confirm: 'この商品を削除しますか？' }, class: 'btn btn-outline-danger btn-sm'%>
              </td>
            </tr>
            <% end %>
