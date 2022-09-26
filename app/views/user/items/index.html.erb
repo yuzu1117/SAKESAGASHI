@@ -18,6 +18,8 @@
           <li class ="list-unstyled card-text">発売日：<%= item.release_date %></li>
           <li class ="list-unstyled card-text">ジャンル：<%= item.genre.name %></li>
           <br>
+
+          <% if item.reviews != [] %>
           <li class ="list-unstyled card-text" id="star-average<%= item.id %>">
           <script>
             $('#star-average<%= item.id %>').raty({
@@ -32,6 +34,7 @@
           </script>
           <%= item.reviews.average(:star).round(2) %>
           </li>
+          <% end %>
         </ul>
       </div>
       <% end %>

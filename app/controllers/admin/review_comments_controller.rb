@@ -6,7 +6,7 @@ class Admin::ReviewCommentsController < ApplicationController
 
   def destroy
     review_comment = ReviewComment.find(params[:id])
-    if review_comment.delete
+    if review_comment.destroy
       flash[:notice] = "コメントを削除しました。"
       redirect_to admin_review_comments_path
     end

@@ -36,7 +36,7 @@ class Admin::ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    if @item.delete
+    if @item.destroy
       flash[:notice] = "商品を削除しました。"
       redirect_to admin_items_path
     else

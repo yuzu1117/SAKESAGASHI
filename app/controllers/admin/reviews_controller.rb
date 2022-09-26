@@ -6,7 +6,7 @@ class Admin::ReviewsController < ApplicationController
 
   def destroy
     review = Review.find(params[:id])
-    if review.delete
+    if review.destroy
       flash[:notice] = "レビューを削除しました。"
       redirect_to admin_reviews_path
     end
