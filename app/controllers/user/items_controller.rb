@@ -10,10 +10,11 @@ class User::ItemsController < ApplicationController
 
   def index
     keyword = params[:keyword]
-    if params[:keyword]
-       @items = Item.where("name LIKE(?)", "%#{keyword}%")
+    #キーワード検索
+    params[:keyword]
+    @items = Item.where("name LIKE(?)", "%#{keyword}%")
     #ジャンル検索
-    else params[:genre_id]
+    if params[:genre_id]
        @genre = Genre.find(params[:genre_id])
        @items = @genre.items.all
     end
@@ -25,7 +26,7 @@ class User::ItemsController < ApplicationController
     if @reviews != []
       #星の平均値を出すメソッド
       @average = @item.reviews.average(:star).round(2)
-      #味の平均値を出すメソッド
+      #味の平均値を出すメソッド　
       @ave_sharpness = @reviews.average(:sharpness).round(2)
       @ave_rich = @reviews.average(:rich).round(2)
       @ave_sourness = @reviews.average(:sourness).round(2)
