@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 2022_10_04_034431) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "item_tags", force: :cascade do |t|
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "maker", null: false
@@ -90,6 +93,9 @@ ActiveRecord::Schema.define(version: 2022_10_04_034431) do
     t.integer "sweetness", default: 0, null: false
     t.integer "bitterness", default: 0, null: false
     t.decimal "score", precision: 5, scale: 3
+  end
+
+  create_table "tags", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|
