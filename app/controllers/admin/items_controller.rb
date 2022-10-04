@@ -7,6 +7,10 @@ class Admin::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     if item.save
+      tags = Vision.get_image_data(item.image)
+      tags.each do |tag|
+      item.tags.create(name: tag)
+      end
       flash[:notice] = "商品が登録されました。"
       redirect_to admin_items_path
     else

@@ -29,14 +29,14 @@
 - 自分の好みの酒を見つける時
 
 ## 設計書
-後ほど追加
+![SAKESAGASHI_ER図](https://user-images.githubusercontent.com/108598161/192991048-32c253ea-9560-4c17-8655-b5751b87f7b8.png)
 
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
+- フレームワーク：Ruby on Rails, Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
 ## 使用素材
-検討中です。
+各飲料メーカーより引用。
