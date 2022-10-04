@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
-  has_many :tags, dependent: :destroy
   belongs_to :genre
   has_one_attached :image
 

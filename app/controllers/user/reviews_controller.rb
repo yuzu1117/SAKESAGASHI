@@ -10,6 +10,7 @@ class User::ReviewsController < ApplicationController
   def create
     item = Item.find(params[:item_id])
     review = Review.new(review_params)
+    review.score = Language.get_data(review_params[:content])
     review.user_id = current_user.id
     review.item_id = item.id
     if review.save

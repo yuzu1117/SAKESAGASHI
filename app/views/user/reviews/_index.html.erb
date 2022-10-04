@@ -18,6 +18,7 @@
         <%= review.star %>
       </div>
       <p><%= review.content.truncate(50) %></p>
+      <span class="sentiment-score"><%= review.score %></span>
       <%= link_to '詳細を見る', user_item_review_path(review.item.id, review.id) %>
     </div>
   <% end %>
